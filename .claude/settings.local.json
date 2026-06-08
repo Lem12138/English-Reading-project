@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(timeout 8 npx tsx src/index.ts)",
+      "Bash(npx create-vite@latest client --template react-ts)",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)",
+      "Bash(npx tsx *)",
+      "Bash(kill %1)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(sqlite3 \"D:/chase/code/English_reading_project/server/dev.db\" \"SELECT count\\(*\\) FROM Article;\")",
+      "Bash(curl *)",
+      "Bash(node -e ' *)",
+      "WebSearch",
+      "WebFetch(domain:api.shanbay.com)",
+      "Bash(echo \"proxy_status: $?\")",
+      "Bash(node -e 'const {PrismaClient}=require\\('\\\\''@prisma/client'\\\\''\\);const p=new PrismaClient\\(\\);p.article.deleteMany\\(\\).then\\(r=>{console.log\\('\\\\''Deleted'\\\\'',r.count\\);p.$disconnect\\(\\)}\\)')",
+      "Bash(python3 -c \"import sys,json;d=json.load\\(sys.stdin\\);c=d['choices'][0]['message'];print\\('content:',c.get\\('content'\\)\\);print\\('reasoning_len:',len\\(c.get\\('reasoning',''\\) or ''\\)\\)\")",
+      "Bash(node -e 'const {PrismaClient}=require\\('\\\\''@prisma/client'\\\\''\\);const p=new PrismaClient\\(\\);p.article.deleteMany\\(\\).then\\(r=>{console.log\\('\\\\''Cleared'\\\\'',r.count\\);p.$disconnect\\(\\)}\\)')",
+      "Bash(node -e 'const {PrismaClient}=require\\('\\\\''@prisma/client'\\\\''\\);const p=new PrismaClient\\(\\);p.user.updateMany\\({data:{role:'\\\\''admin'\\\\''}}\\).then\\(r=>{console.log\\('\\\\''Set'\\\\'',r.count,'\\\\''user\\(s\\) as admin'\\\\''\\);p.$disconnect\\(\\)}\\)')",
+      "Bash(rsync --version)",
+      "Bash(ssh *)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(node node_modules/typescript/bin/tsc --noEmit)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
