@@ -90,6 +90,35 @@ export const api = {
         body: JSON.stringify({ articleId }),
       }),
   },
+  essays: {
+    list: (params?: { page?: number; pageSize?: number; level?: string; type?: string }) => {
+      const sp = new URLSearchParams();
+      if (params?.page) sp.set('page', String(params.page));
+      if (params?.pageSize) sp.set('pageSize', String(params.pageSize));
+      if (params?.level) sp.set('level', params.level);
+      if (params?.type) sp.set('type', params.type);
+      const qs = sp.toString();
+      return request<{ essays: import('../types').EssayItem[]; total: number; page: number; pageSize: number }>(
+        `/essays${qs ? '?' + qs : ''}`
+      );
+    },
+    get: (id: number) =>
+      request<{ essay: import('../types').EssayDetail }>(`/essays/${id}`),
+  },
+  essayFavorites: {
+    list: () =>
+      request<{ favorites: { id: number; essay: import('../types').EssayItem }[] }>('/essay-favorites'),
+    toggle: (essayId: number) =>
+      request<{ favorited: boolean }>(`/essay-favorites/${essayId}`, { method: 'POST' }),
+    check: (essayId: number) =>
+      request<{ favorited: boolean }>(`/essay-favorites/${essayId}`),
+  },
+  essayHistory: {
+    list: () =>
+      request<{ histories: { id: number; essayId: number; readAt: string; essay: { id: number; title: string; level: string } }[] }>('/essay-history'),
+    record: (essayId: number) =>
+      request<{ success: boolean }>('/essay-history', { method: 'POST', body: JSON.stringify({ essayId }) }),
+  },
   favorites: {
     list: () =>
       request<{ favorites: { id: number; article: import('../types').ArticleItem }[] }>('/favorites'),

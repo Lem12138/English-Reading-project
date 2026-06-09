@@ -154,11 +154,15 @@ router.post('/lookup', async (req, res: Response) => {
         enDefinitions, contextNotes,
       },
     });
-  } catch {
+  } catch (err: any) {
+    console.error('[Dict] Youdao lookup failed:', err?.message || err);
     const [enDefinitions, contextNotes] = await Promise.all([enDefsPromise, contextPromise]);
+    const fallback = enDefinitions.length > 0
+      ? enDefinitions.slice(0, 2).map(d => d.definition).join(' | ')
+      : '';
     return res.json({
       result: {
-        word: original, phonetic: '', translation: '查词服务暂不可用，请稍后重试',
+        word: original, phonetic: '', translation: fallback || '查词服务暂不可用',
         explains: [], enDefinitions, contextNotes,
       },
     });

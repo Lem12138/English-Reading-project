@@ -12,6 +12,9 @@ import historyRoutes from './routes/history.js';
 import dictRoutes from './routes/dictionary.js';
 import favoriteRoutes from './routes/favorites.js';
 import adminRoutes from './routes/admin.js';
+import essayRoutes from './routes/essays.js';
+import essayHistoryRoutes from './routes/essayHistory.js';
+import essayFavoriteRoutes from './routes/essayFavorites.js';
 import { authMiddleware } from './middleware/auth.js';
 import { fetchAndSaveArticles } from './services/newsFetcher.js';
 
@@ -34,6 +37,9 @@ app.use('/api/history', authMiddleware, historyRoutes);
 app.use('/api/dict', authMiddleware, dictRoutes);
 app.use('/api/favorites', authMiddleware, favoriteRoutes);
 app.use('/api/admin', authMiddleware, adminRoutes);
+app.use('/api/essays', authMiddleware, essayRoutes);
+app.use('/api/essay-history', authMiddleware, essayHistoryRoutes);
+app.use('/api/essay-favorites', authMiddleware, essayFavoriteRoutes);
 
 // Cron: fetch news at 8:00 and 20:00
 cron.schedule('0 8,20 * * *', () => {

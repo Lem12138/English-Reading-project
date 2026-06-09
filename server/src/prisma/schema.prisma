@@ -15,10 +15,12 @@ model User {
   role      String   @default("user")
   createdAt DateTime @default(now())
 
-  words     SavedWord[]
-  sentences SavedSentence[]
-  histories ReadingHistory[]
-  favorites Favorite[]
+  words          SavedWord[]
+  sentences      SavedSentence[]
+  histories      ReadingHistory[]
+  essayHistories  EssayHistory[]
+  favorites      Favorite[]
+  essayFavorites  EssayFavorite[]
 }
 
 model Article {
@@ -81,6 +83,21 @@ model SavedSentence {
   article Article? @relation(fields: [articleId], references: [id], onDelete: SetNull)
 }
 
+model Essay {
+  id            Int      @id @default(autoincrement())
+  level         String   // CET-4, CET-6, TEM-8
+  type          String   // writing, translation
+  title         String
+  prompt        String   // 真题原题
+  content       String   // JSON: [{essay, translation}, ...] or string for translation
+  highlights    String?
+  examDate      String   // e.g. "2024-06"
+  createdAt     DateTime @default(now())
+
+  histories  EssayHistory[]
+  favorites  EssayFavorite[]
+}
+
 model ReadingHistory {
   id        Int      @id @default(autoincrement())
   userId    Int
@@ -91,4 +108,28 @@ model ReadingHistory {
   article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
   @@unique([userId, articleId])
+}
+
+model EssayHistory {
+  id      Int      @id @default(autoincrement())
+  userId  Int
+  essayId Int
+  readAt  DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  essay Essay @relation(fields: [essayId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, essayId])
+}
+
+model EssayFavorite {
+  id      Int      @id @default(autoincrement())
+  userId  Int
+  essayId Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  essay Essay @relation(fields: [essayId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, essayId])
 }

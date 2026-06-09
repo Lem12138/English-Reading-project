@@ -80,6 +80,33 @@ export interface ContextNote {
   summary: string;
 }
 
+export interface EssayItem {
+  id: number;
+  level: string;
+  type: string;
+  title: string;
+  prompt: string;
+  examDate: string;
+  createdAt: string;
+}
+
+export interface EssayDetail {
+  id: number;
+  level: string;
+  type: string;
+  title: string;
+  prompt: string;
+  content: string | EssayVersion[];
+  highlights: string | null;
+  examDate: string;
+  createdAt: string;
+}
+
+export interface EssayVersion {
+  essay: string;
+  translation: string;
+}
+
 export interface DictResult {
   word: string;
   phonetic: string;

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "seed": "tsx src/prisma/seed.ts"
   },
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
@@ -17,6 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^3.0.3",
     "openai": "^6.42.0",
+    "pdf-parse": "^1.1.4",
+    "pdfjs-dist": "^4.10.38",
     "rss-parser": "^3.13.0",
     "undici": "^8.4.0"
   },

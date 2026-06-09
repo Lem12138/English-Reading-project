@@ -9,6 +9,8 @@ import WordBook from './pages/WordBook';
 import History from './pages/History';
 import Favorites from './pages/Favorites';
 import Intro from './pages/Intro';
+import Essays from './pages/Essays';
+import EssayReader from './pages/EssayReader';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -42,6 +44,8 @@ export default function App() {
         <Route path="history" element={<History />} />
         <Route path="intro" element={<Intro />} />
         <Route path="favorites" element={<Favorites />} />
+        <Route path="essays" element={<Essays />} />
+        <Route path="essay/:id" element={<EssayReader />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
